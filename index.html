@@ -37,8 +37,7 @@
         #no {
             background-color: red;
             color: white;
-            position: absolute;
-            transition: transform 0.1s ease, left 0.1s ease, top 0.1s ease;
+            transition: opacity 0.3s ease;
         }
         .celebration {
             position: fixed;
@@ -54,30 +53,62 @@
             color: red;
             display: none;
         }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 24px;
+            animation: floatUp 1.5s ease-out forwards;
+        }
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-100px); }
+        }
+        #catImage {
+            display: none;
+            width: 200px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <h1>Sarina, will you be my Valentine? 💖</h1>
     <div class="button-container">
         <button id="yes" onclick="celebrate()">Yes</button>
-        <button id="no" onmouseover="moveNoButton()" ontouchstart="moveNoButton()">No</button>
+        <button id="no" onmouseover="fadeNoButton()" ontouchstart="fadeNoButton()">No</button>
     </div>
+    <img id="catImage" src="Cat.jpeg">
     <div id="celebration" class="celebration">Good choice! Happy Valentine's, beautiful! ❤️</div>
 
     <script>
-        function moveNoButton() {
+        let noClickCount = 0;
+        function fadeNoButton() {
             let button = document.getElementById("no");
-            let maxWidth = window.innerWidth - button.clientWidth;
-            let maxHeight = window.innerHeight - button.clientHeight;
-            let newLeft = Math.random() * maxWidth;
-            let newTop = Math.random() * maxHeight;
-            
-            button.style.left = newLeft + "px";
-            button.style.top = newTop + "px";
+            let catImage = document.getElementById("catImage");
+            let currentOpacity = parseFloat(window.getComputedStyle(button).opacity);
+            if (currentOpacity > 0) {
+                button.style.opacity = (currentOpacity - 0.2).toString();
+                noClickCount++;
+            }
+            if (noClickCount >= 5) {
+                catImage.style.display = "block";
+            }
         }
 
         function celebrate() {
             document.getElementById("celebration").style.display = "flex";
+            for (let i = 0; i < 20; i++) {
+                createHeart();
+            }
+        }
+
+        function createHeart() {
+            let heart = document.createElement("div");
+            heart.innerHTML = "❤️";
+            heart.className = "heart";
+            heart.style.left = Math.random() * 100 + "%";
+            heart.style.top = "50%";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 1500);
         }
     </script>
 </body>
