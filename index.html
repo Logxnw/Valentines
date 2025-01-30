@@ -38,7 +38,7 @@
             background-color: red;
             color: white;
             position: absolute;
-            transition: 0.1s ease;
+            transition: transform 0.1s ease, left 0.1s ease, top 0.1s ease;
         }
         .celebration {
             position: fixed;
@@ -60,17 +60,17 @@
     <h1>Sarina, will you be my Valentine? 💖</h1>
     <div class="button-container">
         <button id="yes" onclick="celebrate()">Yes</button>
-        <button id="no" onmouseover="moveNoButton()">No</button>
+        <button id="no" onmouseover="moveNoButton()" ontouchstart="moveNoButton()">No</button>
     </div>
     <div id="celebration" class="celebration">Good choice! Happy Valentine's, beautiful! ❤️</div>
 
     <script>
         function moveNoButton() {
             let button = document.getElementById("no");
-            let currentLeft = button.offsetLeft;
-            let currentTop = button.offsetTop;
-            let newLeft = currentLeft + (Math.random() * 100 - 50);
-            let newTop = currentTop + (Math.random() * 100 - 50);
+            let maxWidth = window.innerWidth - button.clientWidth;
+            let maxHeight = window.innerHeight - button.clientHeight;
+            let newLeft = Math.random() * maxWidth;
+            let newTop = Math.random() * maxHeight;
             
             button.style.left = newLeft + "px";
             button.style.top = newTop + "px";
