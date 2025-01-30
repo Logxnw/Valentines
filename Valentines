@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Survey</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: pink;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        h1 {
+            color: red;
+        }
+        .button-container {
+            margin-top: 20px;
+            position: relative;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        #yes {
+            background-color: green;
+            color: white;
+        }
+        #no {
+            background-color: red;
+            color: white;
+            position: absolute;
+            transition: 0.1s ease;
+        }
+        .celebration {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sarina, will you be my Valentine? 💖</h1>
+    <div class="button-container">
+        <button id="yes" onclick="celebrate()">Yes</button>
+        <button id="no" onmouseover="moveNoButton()">No</button>
+    </div>
+    <div id="celebration" class="celebration">Good choice! Happy Valentine's, beautiful! ❤️</div>
+
+    <script>
+        function moveNoButton() {
+            let button = document.getElementById("no");
+            let currentLeft = button.offsetLeft;
+            let currentTop = button.offsetTop;
+            let newLeft = currentLeft + (Math.random() * 100 - 50);
+            let newTop = currentTop + (Math.random() * 100 - 50);
+            
+            button.style.left = newLeft + "px";
+            button.style.top = newTop + "px";
+        }
+
+        function celebrate() {
+            document.getElementById("celebration").style.display = "flex";
+        }
+    </script>
+</body>
+</html>
